@@ -70,3 +70,98 @@ b) Apenas I e II.
 ```
 ### Questão 8
 
+Arquivo ```Calculadora.java```
+```
+package Calculadora;
+
+public class Calculadora{
+    private int numberOne;
+    private int numberTwo;
+
+    public Calculadora(){
+        this.numberOne = 0;
+        this.numberTwo = 0;
+    }
+
+    private int Soma(){
+        return numberOne + numberTwo;
+    } 
+
+    public int Somar(int valueOne, int valueTwo){
+        if (valueOne < 0 || valueTwo < 0) {
+            throw new IllegalArgumentException("Os números devem ser inteiros positivos.");
+        }
+        else{
+            this.numberOne = valueOne;
+            this.numberTwo = valueTwo;
+            return Soma();
+        }
+    }
+
+    public int Multiplicar(int valueOne, int valueTwo){
+        if (valueTwo < 0) {
+            throw new IllegalArgumentException("O segundo número deve ser positivo!");
+        }
+        else{
+            this.numberOne = valueOne;
+            this.numberTwo = valueTwo;
+            return numberOne * numberTwo;
+        }
+    }
+    
+
+    public double Desconto(double value, double percent){
+        if (value < 0 || percent < 0) {
+            throw new IllegalArgumentException("Os números devem ser positivos.");
+        }
+        return value - (value * (percent/100));
+    }
+}
+```
+
+Arquivo ```Aplicacao.java```
+```
+package Calculadora;
+
+import java.util.*;
+
+public class Aplicacao {
+
+    public static void main(String[] args) {
+        int op = 0;
+        int valueOne, valueTwo;
+        double value, taxaDesconto;
+
+        Scanner input = new Scanner(System.in);
+        Calculadora calc = new Calculadora();
+
+        System.out.println("1 - Somar\n2 - Multiplicar\n3 - Calcular desconto\n");
+        System.out.print("Escolha uma operação: ");
+        op = input.nextInt();
+
+        switch(op){
+            case 1:
+                System.out.print("Insira o PRIMEIRO valor: ");
+                valueOne = input.nextInt();
+                System.out.print("Insira o SEGUNDO valor: ");
+                valueTwo = input.nextInt();
+                System.out.print("Resultado da soma: " + calc.Somar(valueOne, valueTwo));
+            break;
+            case 2:
+                System.out.print("Insira o PRIMEIRO valor: ");
+                valueOne = input.nextInt();
+                System.out.print("Insira o SEGUNDO valor: ");
+                valueTwo = input.nextInt();
+                System.out.print("Resultado da multiplicacao: " + calc.Multiplicar(valueOne, valueTwo));
+            break;
+            case 3:
+                System.out.print("Insira o valor: ");
+                value = input.nextDouble();
+                System.out.print("Insira o percentual de desconto (%): ");
+                taxaDesconto = input.nextDouble();
+                System.out.print("Valor com desconto: R$ " + calc.Desconto(value, taxaDesconto));
+            break;
+        }
+    }
+}
+```
